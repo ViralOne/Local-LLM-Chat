@@ -11,9 +11,12 @@
     <h1>Chat</h1>
     <div class="search-container">
       <input type="text" id="userInput" placeholder="Ask something...">
-      <button onclick="getChatResponse()">Search</button>
+      <button onclick="getChatResponse()">&#128640;</button>
     </div>
-    <div id="responseArea"></div>
+    <div class="response-box">
+      <div id="responseArea" contenteditable="false" class="response-textarea"></div>
+      <button onclick="copyText()" class="copy-button">&#128203; Copy text</button>
+      </div>
     <div class="loading" id="loadingIndicator"></div>
   </div>
 

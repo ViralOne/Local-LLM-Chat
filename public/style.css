@@ -12,8 +12,8 @@ body {
 .container {
     text-align: center;
     min-height: 50vh;
-    width: 90%; /* Adjusted max-width to a percentage */
-    max-width: 800px; /* Adjusted max-width value */
+    width: 90%;
+    max-width: 800px;
     padding: 40px;
     overflow-y: auto;
     background-color: #2d2f31;
@@ -22,13 +22,47 @@ body {
 }
 
 .search-container {
-    max-width: 800px; /* Adjusted max-width value */
+    max-width: 800px;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     display: flex;
     overflow: hidden;
-    margin-bottom: 20px; /* Added margin to create space below the search container */
+    margin-bottom: 20px;
+}
+
+.response-box {
+    position: relative;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+  
+.response-textarea {
+    min-height: 100px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-bottom: 8px;
+    outline: none;
+    border-radius: 4px;
+    resize: vertical;
+    overflow-y: auto;
+}
+  
+.copy-button {
+    position: absolute;
+    bottom: -25px;
+    right: 10px;
+    padding: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
 }
 
 h1 {
@@ -44,8 +78,8 @@ input[type="text"] {
     font-size: 16px;
     color: #fff;
     background-color: #444;
-    border-top-left-radius: 6px; /* Added border radius to match search container */
-    border-bottom-left-radius: 6px; /* Added border radius to match search container */
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 
 button {
@@ -57,8 +91,8 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 1.2rem;
-    border-top-right-radius: 6px; /* Added border radius to match search container */
-    border-bottom-right-radius: 6px; /* Added border radius to match search container */
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 button:hover {
@@ -102,4 +136,38 @@ button:hover {
 
 .show-loading {
     display: block;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: rgba(0, 123, 255, 0.9);
+    color: white;
+    border-radius: 5px;
+    z-index: 9999;
+}
+  
+/* Animating the notification */
+.notification {
+    animation: slideIn 0.5s ease-out forwards, fadeOut 0.5s 2.5s forwards;
+}
+  
+@keyframes slideIn {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+}
+  
+@keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
 }
