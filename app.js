@@ -14,10 +14,12 @@ app.get('/', (req, res) => {
 
 app.post('/getChatResponse', async (req, res) => {
   const { userInput } = req.body;
+  const systemInput = "You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.";
 
   try {
     const response = await axios.post('http://localhost:1234/v1/chat/completions', {
-      messages: [{ role: 'user', content: userInput }],
+      messages: [{ role: 'system', content: systemInput },
+                 { role: 'user', content: userInput }],
       temperature: 0.7,
       max_tokens: -1,
       stream: false,
