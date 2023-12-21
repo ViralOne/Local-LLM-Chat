@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -30,6 +31,41 @@ app.post('/getChatResponse', async (req, res) => {
     });
 
     const responseData = response.data.choices[0].message.content;
+    res.send({ response: responseData });
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred');
+  }
+});
+
+app.post('/maratonHelper', async (req, res) => {
+  let history;
+  try {
+    const data = fs.readFileSync('data/pre-prompts/maraton.json', 'utf8');
+    history = JSON.parse(data);
+  } catch (err) {
+    console.error('Error reading history file:', err);
+    history = [];
+  }
+  const { userInput } = req.body;
+
+  try {
+    history.push({ "role": "user", "content": userInput });
+    // console.log(history);
+    
+    const response = await axios.post('http://localhost:1234/v1/chat/completions', {
+      messages: history,
+      temperature: 0.7,
+      max_tokens: -1,
+      stream: false,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseData = response.data.choices[0].message.content;
+
     res.send({ response: responseData });
   } catch (error) {
     console.error('Error:', error.message);
